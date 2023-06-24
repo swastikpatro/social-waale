@@ -6,11 +6,19 @@ import {
   Box,
   Card,
   CardBody,
+  CardFooter,
   CardHeader,
   Center,
+  Icon,
+  IconButton,
   Text,
 } from '@chakra-ui/react';
 import PostCard from '../components/PostCard';
+import {
+  AiFillHeart,
+  AiOutlineComment,
+  AiOutlineShareAlt,
+} from 'react-icons/ai';
 
 const SinglePostPage = () => {
   const { postId: postIdFromParam } = useParams();
@@ -40,12 +48,31 @@ const SinglePostPage = () => {
       <Box>
         {postToDisplay.comments.map(comment => (
           <Card key={comment.commentId}>
-            <CardHeader>
-              <Avatar name={comment.username} src={comment.picUrl}></Avatar>
+            <CardHeader display={'flex'} gap=".5rem">
+              <Avatar name={comment.username} src={comment.picUrl} />
             </CardHeader>
             <CardBody>
               <Text>{comment.comment}</Text>
             </CardBody>
+            <CardFooter
+              justify="space-between"
+              flexWrap="wrap"
+              sx={{
+                '& > button': {
+                  minW: '136px',
+                },
+              }}
+            >
+              <IconButton flex="1" variant="ghost">
+                <Icon as={AiFillHeart} />
+              </IconButton>
+              <IconButton flex="1" variant="ghost">
+                <Icon as={AiOutlineShareAlt} />
+              </IconButton>
+              <IconButton flex="1" variant="ghost">
+                <Icon as={AiOutlineComment} />
+              </IconButton>
+            </CardFooter>
           </Card>
         ))}
       </Box>
